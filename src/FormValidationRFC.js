@@ -31,6 +31,7 @@ export default class FormValidationRFC extends Component {
             ...this.state,
             ...data
           });
+          console.log(this.state.isError)
           
     }
 
@@ -41,7 +42,7 @@ export default class FormValidationRFC extends Component {
         // console.log(this.state.password);
         // console.log(this.state.confirmPassword);
 
-        console.log(this.state)
+    
         this.validation()
         //alert("okok");
     }
@@ -49,12 +50,20 @@ export default class FormValidationRFC extends Component {
 
 
     validation(){
-        console.log(this.state.name)
+        const data = this.state.isError
+        this.state.isError = {}
+        //console.log(this.state.name)
         if(!this.state.name){
-            this.state.isError.name = "please enter your name"
+            data.name = "please enter your name";
         }
         if(!this.state.email){
-            this.state.isError.email = "pleas enter email"
+            data.email = "pleas enter email";
+        }
+        if(!this.state.password){
+            data.password = "pleas enter password";
+        }
+        if(!this.state.confirmPassword){
+            data.confirmPassword = "pleas enter confirmPassword";
         }
     }
 
