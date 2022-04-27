@@ -30,21 +30,29 @@ export default function App() {
     newData = { ...data, [e.target.name]: e.target.value }
     setData({ ...data, ...newData });
     //console.log(data)
-    remove(newData);
+    //remove(newData);
   }
 
   let remove = (values) => {
 
     //console.log(values)
+    // name input validation
     if(values.name !== "") {
       error.name = '';
     }
+
+    // email input validation
     if(values.email !== ""){
       error.email = "";
     }
+
+    // password input validation
     if(values.password !== ""){
       error.password = "";
     }
+
+
+    // confirmPassword input validation
     if(values.confirmPassword !== ""){
       error.confirmPassword = '';
     }
@@ -58,7 +66,9 @@ export default function App() {
     const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const passregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     //console.log("data",value);
+    
 
+    // name input validation
     if (!value.name) {
       error.name = "please enter your name"
     } else if (!numberregex.test(value.name)) {
@@ -66,6 +76,8 @@ export default function App() {
     }
     //console.log(value.name.length)
 
+
+    // email input validation
     if (!value.email) {
       error.email = "please enter your email"
     } else if (!emailregex.test(value.email)) {
@@ -73,26 +85,29 @@ export default function App() {
     }
 
 
+
+    // password input validation
     if (!value.password) {
       error.password = "please enter your password"
     } else if (value.password.length <= 2) {
-      error.password = "please enter less than "
+      error.password = "please enter grater than 2 "
     } else if (!passregex.test(value.password)) {
       error.password = "6 to 20  numeric digit, one uppercase and one lowercase letter"
     }
 
 
+    // confirmPassword input validation
     if (!value.confirmPassword) {
       error.confirmPassword = "please enter your confirmPassword"
     } else if (value.confirmPassword.length <= 2) {
-      error.confirmPassword = "please enter lessthe "
+      error.confirmPassword = "please enter grater than 2 "
     } else if (!passregex.test(value.confirmPassword)) {
       error.confirmPassword = "6 to 20  numeric digit, one uppercase and one lowercase letter"
     } else if (value.password !== value.confirmPassword) {
       error.confirmPassword = "password does not match"
     }
 
-
+    // return statement 
     return error;
   };
 

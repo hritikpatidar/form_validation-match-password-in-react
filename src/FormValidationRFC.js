@@ -23,51 +23,87 @@ export default class FormValidationRFC extends Component {
         //console.log(name,value)
         const name = e.target.name;
         const value = e.target.value;
-
+        //console.log(name)
         let data ={...this.state}
         data = {...this.state,[name]:value}
+        
         e.preventDefault();
         this.setState({
             ...this.state,
-            ...data
+            ...data,
+            isError:{
+                name:"",
+                email:"",
+                password:"",
+                confirmPassword:""
+            }
           });
-          console.log(this.state.isError)
+          console.log(this.state.isError.name);
+          console.log(this.state.isError.email);
           
     }
+    
 
     handalSubmit =(e)=>{
         e.preventDefault();
-        // console.log(this.state.name); 
+        //console.log(this.state.name); 
         // console.log(this.state.email);
         // console.log(this.state.password);
-        // console.log(this.state.confirmPassword);
-
-    
-        this.validation()
+        //console.log(this.state.confirmPassword);
+        console.log(this.state)
+        //console.log(this.state.isError)
+        
+        this.setState(this.validation())
         //alert("okok");
     }
 
 
 
     validation(){
-        const data = this.state.isError
-        this.state.isError = {}
-        //console.log(this.state.name)
+        const data = this.state.isError;
+        const numberregex = /^[a-zA-Z]+$/;
+        const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const passregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        //console.log(this.state.email)
+        const isError = {}
+
+        // name input validatoin
         if(!this.state.name){
             data.name = "please enter your name";
+        }else if (!numberregex.test(this.state.name)) {
+            data.name = "enter only alphabets"
         }
+
+        // email input validation
         if(!this.state.email){
             data.email = "pleas enter email";
+        }else if (!emailregex.test(this.state.email)) {
+            data.email = "email does not valid "
         }
+
+        // password input validation
         if(!this.state.password){
             data.password = "pleas enter password";
+        }else if (this.state.password.length <= 2) {
+            data.password = "please enter grater than 2"
+        }else if (!passregex.test(this.state.password)) {
+            data.password = "uppercase and lowercase letter and 6 to 20 numeric digit"
         }
+
+        // confirmPassword input validation
         if(!this.state.confirmPassword){
             data.confirmPassword = "pleas enter confirmPassword";
+        }else if (this.state.confirmPassword.length <= 2) {
+            data.confirmPassword = "please enter grater than 2 "
+        }else if (!passregex.test(this.state.confirmPassword)) {
+            data.confirmPassword = "6 to 20  numeric digit, one uppercase and one lowercase letter"
+        }else if (this.state.password !== this.state.confirmPassword) {
+            data.confirmPassword = "password does not match"
         }
+
+        //return statement
+        return isError;
     }
-
-
     render() {
         return (
             <React.Fragment>
