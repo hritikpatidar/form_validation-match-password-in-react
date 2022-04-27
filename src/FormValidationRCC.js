@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class FormValidationRFC extends Component {
+export default class FormValidationRCC extends Component {
     constructor(props){
         super(props)
         this.state={

@@ -30,7 +30,7 @@ export default function App() {
     newData = { ...data, [e.target.name]: e.target.value }
     setData({ ...data, ...newData });
     //console.log(data)
-    //remove(newData);
+    remove(newData);
   }
 
   let remove = (values) => {
