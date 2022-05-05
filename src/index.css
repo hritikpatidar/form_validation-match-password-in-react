@@ -19,4 +19,9 @@ code {
 #my_form{
   text-align: center;
 }
+
+#my_form > h1 {
+  font-family: 'Water Brush', cursive;
+  color:red;
+}
  
